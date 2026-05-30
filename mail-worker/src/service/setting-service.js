@@ -238,8 +238,7 @@ const settingService = {
 			linuxdoCallbackUrl: settingRow.linuxdoCallbackUrl,
 			linuxdoSwitch: settingRow.linuxdoSwitch,
 			minEmailPrefix: settingRow.minEmailPrefix,
-			projectLink: settingRow.projectLink,
-			loginLayout: settingRow.loginLayout
+			projectLink: settingRow.projectLink
 		};
 	},
 

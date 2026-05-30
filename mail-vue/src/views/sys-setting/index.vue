@@ -127,12 +127,6 @@
                   </div>
                 </div>
               </div>
-              <div class="setting-item">
-                <div class="title-item"><span>{{ $t('loginLayout') }}</span></div>
-                <div>
-                  <el-segmented v-model="loginLayout" :options="loginLayoutOptions" @change="doLayoutChange" size="small" />
-                </div>
-              </div>
             </div>
           </div>
 
@@ -869,7 +863,6 @@ const clearS3Loading = ref(false)
 const r2DomainInput = ref('')
 const loginOpacity = ref(0)
 const loginDarkenFactor = ref(0)
-const loginLayout = ref('right')
 const minEmailPrefix = ref(0)
 const emailPrefixFilter = ref([])
 const backgroundUrl = ref('')
@@ -950,10 +943,6 @@ const tgMsgFromOption = [{label: t('show'), value: 'show'}, {label: t('hide'), v
 const tgMsgToOption = [{label: t('show'), value: 'show'}, {label: t('hide'), value: 'hide'}]
 const tgMsgTextOption = [{label: t('show'), value: 'show'}, {label: t('hide'), value: 'hide'}]
 const tgMsgLabelWidth = computed(() => locale.value === 'en' ? '120px' : '100px');
-const loginLayoutOptions = computed(() => [
-  { label: t('loginLayoutRight'), value: 'right' },
-  { label: t('loginLayoutCenter'), value: 'center' },
-]);
 
 getSettings()
 getUpdate()
@@ -966,7 +955,6 @@ function getSettings() {
     resendTokenForm.domain = setting.value.domainList[0]
     loginOpacity.value = setting.value.loginOpacity
     loginDarkenFactor.value = normalizeFactor(setting.value.loginDarkenFactor)
-    loginLayout.value = setting.value.loginLayout || 'right'
     minEmailPrefix.value = setting.value.minEmailPrefix
     firstLoading.value = false
     backgroundUrl.value = setting.value.background?.startsWith('http') ? setting.value.background : ''
@@ -1265,11 +1253,6 @@ function doDarkenChange() {
   editSetting(form, true)
 }
 
-function doLayoutChange() {
-  if (!settingReady.value) return
-  editSetting({ loginLayout: loginLayout.value }, true)
-}
-
 function resetEmailPrefix() {
   minEmailPrefix.value = setting.value.minEmailPrefix
   emailPrefixFilter.value = setting.value.emailPrefixFilter
@@ -1540,7 +1523,6 @@ function editSetting(settingForm, refreshStatus = true) {
   }).catch((e) => {
     loginOpacity.value = setting.value.loginOpacity
     loginDarkenFactor.value = normalizeFactor(setting.value.loginDarkenFactor)
-    loginLayout.value = setting.value.loginLayout || 'right'
     setting.value = {...setting.value, ...JSON.parse(backup)}
   }).finally(() => {
     settingLoading.value = false

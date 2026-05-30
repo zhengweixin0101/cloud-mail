@@ -52,7 +52,6 @@ export const setting = sqliteTable('setting', {
 	blackContent: text('black_content').default('').notNull(),
 	blackFrom: text('black_from').default('').notNull(),
 	aiCode: integer('ai_code').default(1).notNull(),
-	aiCodeFilter: text('ai_code_filter').default('').notNull(),
-	loginLayout: text('login_layout').default('right').notNull()
+	aiCodeFilter: text('ai_code_filter').default('').notNull()
 });
 export default setting

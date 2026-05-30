@@ -31,7 +31,7 @@ export async function init() {
             return null;
         });
 
-        const [s, user] = await Promise.all([fetchWebsiteConfig(), userPromise]);
+        const [s, user] = await Promise.all([websiteConfig(), userPromise]);
         setting = s;
         settingStore.settings = setting;
         settingStore.domainList = setting.domainList;
@@ -49,7 +49,7 @@ export async function init() {
         }
 
     } else {
-        setting = await fetchWebsiteConfig();
+        setting = await websiteConfig();
         settingStore.settings = setting;
         settingStore.domainList = setting.domainList;
         document.title = setting.title;

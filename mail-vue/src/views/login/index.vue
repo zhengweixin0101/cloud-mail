@@ -8,7 +8,7 @@
       <div class="x5 cloud"></div>
     </div>
     <div v-else :style="background"></div>
-    <div class="form-wrapper" :class="{ centered: isCenteredLayout }">
+    <div class="form-wrapper">
       <div class="container">
         <span class="form-title">{{ settingStore.settings.title }}</span>
         <span class="form-desc" v-if="show === 'login'">{{ $t('loginTitle') }}</span>
@@ -244,8 +244,6 @@ const loginDarkenFactor = computed(() => {
 })
 
 const hideLoginDomain = computed(() => settingStore.settings.loginDomain === 1)
-
-const isCenteredLayout = computed(() => settingStore.settings.loginLayout === 'center')
 
 const background = computed(() => {
   const bg = settingStore.settings.background
@@ -613,13 +611,8 @@ function submitRegister() {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &.centered {
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: auto;
+  @media (max-width: 767px) {
+    width: 100%;
   }
 }
 
@@ -634,40 +627,19 @@ function submitRegister() {
   height: 100%;
   border-left: 1px solid var(--login-border);
   box-shadow: var(--el-box-shadow-light);
-
-  .form-wrapper.centered & {
-    padding: 48px;
-    width: 480px;
-    height: auto;
-    border: 1px solid var(--login-border);
-    border-left: 1px solid var(--login-border);
-    border-radius: 12px;
-  }
-
   @media (max-width: 1024px) {
     padding: 20px 18px;
     width: 384px;
     margin-left: 18px;
-
-    .form-wrapper.centered & {
-      padding: 28px 24px;
-      width: 420px;
-      margin-left: 0;
-    }
   }
   @media (max-width: 767px) {
     border: 1px solid var(--login-border);
     padding: 20px 18px;
     border-radius: 6px;
     height: fit-content;
-    width: calc(100% - 36px);
+    width: 100%;
     margin-right: 18px;
     margin-left: 18px;
-
-    .form-wrapper.centered & {
-      margin-right: 0;
-      margin-left: 0;
-    }
   }
 
   .btn {
@@ -680,19 +652,11 @@ function submitRegister() {
     margin-top: 5px;
     margin-bottom: 18px;
     color: var(--form-desc-color);
-
-    .form-wrapper.centered & {
-      text-align: center;
-    }
   }
 
   .form-title {
     font-weight: bold;
     font-size: 22px !important;
-
-    .form-wrapper.centered & {
-      text-align: center;
-    }
   }
 
   .switch {
